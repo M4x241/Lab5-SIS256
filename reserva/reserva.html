@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reserva</title>
+</head>
+<body>
+    <form action="">
+        <h1>Reserva de Habitacion</h1>
+
+        <label for="checkin">Fecha de entrada:</label>
+        <input type="date" id="checkin" name="checkin" required>
+
+        <br>
+
+        <label for="checkout">Fecha de salida:</label>
+        <input type="date" id="checkout" name="checkout" required>
+
+        <br>
+
+        <label for="totalPrice">Precio total</label> <p id="price"></p>
+
+        <br>
+
+        <label for="paymentMethod">Método de pago:</label>
+        <select id="paymentMethod" name="paymentMethod" required>
+            <option value="creditCard">Tarjeta de crédito</option>
+            <option value="debitCard">Tarjeta de débito</option>
+            <option value="paypal">PayPal</option>
+            <option value="bankTransfer">Transferencia bancaria</option>
+            <option value="cash">Efectivo</option>
+        </select>
+        <br>
+        <button type="submit">Reservar</button>
+
+    </form>
+    
+</body>
+</html>
