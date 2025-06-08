@@ -1,0 +1,13 @@
+*{
+    margin: 0px 0px;
+}
+div.principal{
+    display: flex;
+    flex-direction: row;
+}
+
+div.menu{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

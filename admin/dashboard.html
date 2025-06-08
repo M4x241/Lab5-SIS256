@@ -1,0 +1,66 @@
+<div class="general">
+  <div class="radios">
+    <label for="tipo"
+      ><input
+        type="radio"
+        name="tipo"
+        value="general"
+        checked
+      />General</label
+    >
+    <br />
+
+    <label for=""
+      ><input type="radio" name="tipo" value="fechas" />Fechas</label
+    >
+    <br />
+
+    <label for=""
+      ><input type="radio" name="tipo" value="tipohabitacion" />Tipos</label
+    >
+  </div>
+
+  <div class="tabla" id="tabla" name="tabla"></div>
+</div>
+
+<style>
+  div.general {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  div.tabla {
+    gap: 20px;
+  }
+  div.radios {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  th {
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    background-color: #007bff;
+  }
+  td {
+    text-align: center;
+    width: 100px;
+    height: 50px;
+  }
+  td.Disponible {
+    color: white;
+
+    background-color: green;
+  }
+  td.Ocupada {
+    background-color: skyblue;
+    color: white;
+  }
+  td.Mantenimiento {
+    background-color: yellow;
+    color: black;
+  }
+</style>
