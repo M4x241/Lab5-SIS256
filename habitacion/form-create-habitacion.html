@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crear Habitación</title>
+</head>
+<body onload="cargarHabitaciones()">
+  <h2>Crear Habitación</h2>
+  <form action="createHabitacion.php" method="POST" enctype="multipart/form-data">
+    <label for="numero">Número de habitación:</label><br />
+    <input type="number" id="numero" name="numero" required /><br /><br />
+
+    <label for="piso">Piso:</label><br />
+    <input type="number" id="piso" name="piso" required /><br /><br />
+
+    <label for="tipo_id">Tipo de habitación:</label><br />
+    <select id="tipo_id" name="tipo_id" required >
+      <!-- aqui cargaran las habitaciones -->
+    </select><br /><br />
+
+  <!--   <label for="fotos">Fotografías:</label><br />
+    <input type="file" name="fotos[]" multiple accept="image/*" required /><br /><br /> -->
+
+    <button type="submit">Crear Habitación</button>
+  </form>
+
+  <script>
+    function cargarHabitaciones() {
+      fetch("readTipoHabitacion.php")
+        .then((response) => response.json())
+        .then((data) => {
+          const select = document.getElementById("tipo_id");
+          select.innerHTML = '<option value="">Seleccione...</option>';
+
+          data.datos.forEach((tipo) => {
+            const option = document.createElement("option");
+            option.value = tipo.id;
+            option.textContent = tipo.nombre;
+            select.appendChild(option);
+          });
+        });
+    }
+  
+  </script>
+</body>
+</html>
