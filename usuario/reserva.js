@@ -21,7 +21,7 @@ function cargarTiposDeHabitacion(objeto) {
   for (let i = 0; i < lista.length; i++) {
     html += `
       <div class="col-md-4">
-        <a href="javascript:cargarhabbitacionportipo(${lista[i].id})" class="text-decoration-none">
+        
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
               <h5 class="card-title fw-bold" style="color:#41663C;">
@@ -34,7 +34,7 @@ function cargarTiposDeHabitacion(objeto) {
               </p>
             </div>
           </div>
-        </a>
+       
       </div>
     `;
   }
