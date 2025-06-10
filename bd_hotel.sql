@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2025 a las 01:14:22
+-- Tiempo de generación: 10-06-2025 a las 05:02:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bd_hotel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `fotografiahabitacion`
+--
+
+CREATE TABLE `fotografiahabitacion` (
+  `id` int(8) NOT NULL,
+  `fotografias_drc` varchar(100) NOT NULL,
+  `orden` int(10) NOT NULL,
+  `id_habitacion` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `fotografiahabitacion`
+--
+
+INSERT INTO `fotografiahabitacion` (`id`, `fotografias_drc`, `orden`, `id_habitacion`) VALUES
+(3, '68476fac8d612.png', 77, 2);
 
 -- --------------------------------------------------------
 
@@ -44,6 +64,20 @@ INSERT INTO `habitaciones` (`id`, `numero`, `piso`, `id_tipoHabitacion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `reservas`
+--
+
+CREATE TABLE `reservas` (
+  `id` int(8) NOT NULL,
+  `fecha_ingreso` date NOT NULL,
+  `fecha_salida` date NOT NULL,
+  `usuario_id` int(8) NOT NULL,
+  `habitacion_id` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tipohabitacion`
 --
 
@@ -59,7 +93,8 @@ CREATE TABLE `tipohabitacion` (
 --
 
 INSERT INTO `tipohabitacion` (`id`, `nombre`, `superficie`, `nro_camas`) VALUES
-(1, 'matrimonial', '15 mt2', '1');
+(1, 'matrimonial', '15 mt2', '1'),
+(3, 'doble', '30 m2', '4');
 
 -- --------------------------------------------------------
 
@@ -88,9 +123,21 @@ INSERT INTO `usuarios` (`id`, `correo`, `nombre`, `apellido`, `password`, `rol`)
 --
 
 --
+-- Indices de la tabla `fotografiahabitacion`
+--
+ALTER TABLE `fotografiahabitacion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `habitaciones`
 --
 ALTER TABLE `habitaciones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `reservas`
+--
+ALTER TABLE `reservas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -110,16 +157,28 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `fotografiahabitacion`
+--
+ALTER TABLE `fotografiahabitacion`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `habitaciones`
 --
 ALTER TABLE `habitaciones`
   MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `tipohabitacion`
 --
 ALTER TABLE `tipohabitacion`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
