@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2025 a las 05:02:48
+-- Tiempo de generación: 10-06-2025 a las 15:52:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -59,7 +59,9 @@ CREATE TABLE `habitaciones` (
 --
 
 INSERT INTO `habitaciones` (`id`, `numero`, `piso`, `id_tipoHabitacion`) VALUES
-(2, '40', '24', 1);
+(2, '40', '24', 1),
+(3, '25', '3', 4),
+(4, '12', '2', 6);
 
 -- --------------------------------------------------------
 
@@ -85,16 +87,19 @@ CREATE TABLE `tipohabitacion` (
   `id` int(8) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `superficie` varchar(100) NOT NULL,
-  `nro_camas` varchar(100) NOT NULL
+  `nro_camas` varchar(100) NOT NULL,
+  `precio` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tipohabitacion`
 --
 
-INSERT INTO `tipohabitacion` (`id`, `nombre`, `superficie`, `nro_camas`) VALUES
-(1, 'matrimonial', '15 mt2', '1'),
-(3, 'doble', '30 m2', '4');
+INSERT INTO `tipohabitacion` (`id`, `nombre`, `superficie`, `nro_camas`, `precio`) VALUES
+(1, 'matrimonial', '15 mt2', '1', '150'),
+(4, 'doble', '30 m2', '4', '8000'),
+(5, 'simple', '5m2', '1', '50'),
+(6, 'familiar', '20m2', '4', '150');
 
 -- --------------------------------------------------------
 
@@ -166,7 +171,7 @@ ALTER TABLE `fotografiahabitacion`
 -- AUTO_INCREMENT de la tabla `habitaciones`
 --
 ALTER TABLE `habitaciones`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
@@ -178,7 +183,7 @@ ALTER TABLE `reservas`
 -- AUTO_INCREMENT de la tabla `tipohabitacion`
 --
 ALTER TABLE `tipohabitacion`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

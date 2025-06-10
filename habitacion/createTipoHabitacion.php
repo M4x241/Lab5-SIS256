@@ -10,11 +10,11 @@ require '../core/verificarRol.php'; */
 $nombre = $_POST['nombre'];
 $superficie=$_POST['superficie'];
 $nro_camas =$_POST['nro_camas'];
-
+$precio =$_POST['precio'];
 
 // Insertar nuevo usuario
-$stmt = $con->prepare("INSERT INTO tipohabitacion(nombre, superficie,nro_camas) VALUES (?, ?,?)");
-$stmt->bind_param("sss", $nombre,$superficie,$nro_camas);
+$stmt = $con->prepare("INSERT INTO tipohabitacion(nombre, superficie,nro_camas,precio) VALUES (?, ?,?,?)");
+$stmt->bind_param("ssss", $nombre,$superficie,$nro_camas ,$precio);
 
 if ($stmt->execute()) {
     echo "habitacion creada correctamente";

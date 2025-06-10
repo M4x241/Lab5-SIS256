@@ -6,15 +6,16 @@ require '../core/verificarRol.php'; */
 $nombre = $_POST['nombre'];
 $superficie=$_POST['superficie'];
 $nro_camas =$_POST['nro_camas'];
+$precio =$_POST['precio'];
 
 $id=$_POST['id'];
 
 
-$stmt=$con->prepare('UPDATE tipohabitacion SET nombre=?,superficie=?,nro_camas=? WHERE id=?');
+$stmt=$con->prepare('UPDATE tipohabitacion SET nombre=?,superficie=?,nro_camas=?,precio=? WHERE id=?');
 
 
 // Vincular parámetros
-$stmt->bind_param("sssi",$nombre,$superficie,$nro_camas,  $id);
+$stmt->bind_param("ssssi",$nombre,$superficie,$nro_camas, $precio, $id);
 
 
 

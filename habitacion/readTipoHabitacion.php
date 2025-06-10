@@ -8,7 +8,7 @@ require '../config/conexion.php';
 require '../core/verificarRol.php';
  */
 
-$sql = "SELECT id,nombre,superficie,nro_camas FROM tipohabitacion";
+$sql = "SELECT id,nombre,superficie,nro_camas,precio FROM tipohabitacion";
 
 $resultado = $con->query($sql);
 
@@ -21,7 +21,8 @@ while ($row = mysqli_fetch_array($resultado)) {
         "id" => $row['id'],
         "nombre" => $row['nombre'],
         "superficie" => $row['superficie'],
-        "nro_camas" => $row['nro_camas']
+        "nro_camas" => $row['nro_camas'],
+        "precio"=>$row['precio']
     ];
 }
 
