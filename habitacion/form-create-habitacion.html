@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Crear Habitación</title>
 </head>
-<body onload="cargarHabitaciones()">
+<body onload="cargarTipoHabitaciones()">
   <h2>Crear Habitación</h2>
   <form action="createHabitacion.php" method="POST" enctype="multipart/form-data">
     <label for="numero">Número de habitación:</label><br />
@@ -18,14 +18,13 @@
       <!-- aqui cargaran las habitaciones -->
     </select><br /><br />
 
-  <!--   <label for="fotos">Fotografías:</label><br />
-    <input type="file" name="fotos[]" multiple accept="image/*" required /><br /><br /> -->
+
 
     <button type="submit">Crear Habitación</button>
   </form>
 
   <script>
-    function cargarHabitaciones() {
+    function cargarTipoHabitaciones() {
       fetch("readTipoHabitacion.php")
         .then((response) => response.json())
         .then((data) => {

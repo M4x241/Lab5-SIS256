@@ -4,11 +4,11 @@
 session_start();
 
 require '../config/conexion.php';
-/* require '../core/verificarsesion.php';
-require '../core/verificarRol.php';
- */
+//require '../core/verificarsesion.php';
+//require '../core/verificarRol.php'; 
 
-$sql = "SELECT id,nombre,superficie,nro_camas FROM tipohabitacion";
+
+$sql = "SELECT id,fotografias_drc,orden,id_habitacion FROM fotografiahabitacion";
 
 $resultado = $con->query($sql);
 
@@ -19,9 +19,9 @@ $arreglo = [];
 while ($row = mysqli_fetch_array($resultado)) {
     $arreglo[] = [
         "id" => $row['id'],
-        "nombre" => $row['nombre'],
-        "superficie" => $row['superficie'],
-        "nro_camas" => $row['nro_camas']
+        "fotografias_drc" => $row['fotografias_drc'],
+        "orden" => $row['orden'],
+        "id_habitacion" => $row['id_habitacion']
     ];
 }
 
