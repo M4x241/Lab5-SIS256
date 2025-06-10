@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Subir Fotografía de Habitación</title>
+  </head>
+  <body onload="cargarHabitaciones()">
+    <h2>Subir Fotografía</h2>
+    <form
+      action="createFotoHabitacion.php"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <label for="fotografia">Seleccionar Fotografía:</label><br />
+      <input type="file" name="fotografia" required /><br /><br />
+
+      <label for="orden">Orden:</label><br />
+      <input type="number" name="orden" id="orden" required /><br /><br />
+      
+      
+      <label for="id_habitacion">Numero de habitacion:</label><br />
+      <select id="id_habitacion" name="id_habitacion" required>
+        <!-- aqui cargaran las habitaciones --></select
+      ><br /><br />
+
+      <button type="submit">Subir Fotografía</button>
+    </form>
+
+    <script>
+      //es un a funcion donde me carga las habitaciones  que uso para el select
+      function cargarHabitaciones() {
+        fetch("readhabitacion.php")
+          .then((response) => response.json())
+          .then((data) => {
+            const select = document.getElementById("id_habitacion");
+            select.innerHTML = '<option value="">Seleccione...</option>';
+
+            data.datos.forEach((tipo) => {
+              const option = document.createElement("option");
+              option.value = tipo.id;
+              option.textContent = tipo.numero;
+              select.appendChild(option);
+            });
+          });
+      }
+    </script>
+  </body>
+</html>
