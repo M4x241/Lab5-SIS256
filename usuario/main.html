@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/main.css">
+    <script src="usuario.js"></script>
 </head>
 <body style="background: #f7faf6;">
 <!-- HEADER (Navbar) -->
@@ -30,20 +31,7 @@
         <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
         <li class="nav-item"><a class="nav-link" href="../auth/inicioSesion.html">Reservar</a></li>
       </ul>
-      <!-- Usuario: Desplegable -->
-      <ul class="navbar-nav ms-3">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-user-circle" style="font-size: 1.5rem;"></i>
-            <span class="d-none d-lg-inline" id="usuarioNombre">Iniciar sesión</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end shadow" id="usuarioDropdown">
-            <!-- Cambia con JS -->
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginOpcion">Iniciar sesión</a>
-</li>
-          </ul>
-        </li>
-      </ul>
+      <div id="usuarioNombre" class="ms-3"></div>
     </div>
   </div>
 </nav>
@@ -58,8 +46,6 @@
     <a href="reservacion.html" class="btn btn-lg btn-custom px-4">Reserva Ahora</a>
   </div>
 </section>
-
-
 
 <!-- SECCIÓN HABITACIONES -->
 <section id="habitaciones" class="py-5 bg-light">
@@ -118,7 +104,7 @@
   </div>
 </section>
 
-<!-- SECCIÓN SERVICIOS (opcional, puedes ampliar) -->
+<!-- SECCIÓN SERVICIOS -->
 <section id="servicios" class="py-5 bg-light">
   <div class="container">
     <h2 class="mb-4 text-center fw-bold" style="color:#41663C;">Servicios</h2>
@@ -154,7 +140,7 @@
   </div>
 </section>
 
-<!-- SECCIÓN CONTACTO (solo ancla, puedes mejorarla luego) -->
+<!-- SECCIÓN CONTACTO -->
 <section id="contacto" class="py-5">
   <div class="container text-center">
     <h2 class="mb-4 fw-bold" style="color:#41663C;">Contacto</h2>
@@ -181,43 +167,14 @@
 <!-- Modal Login Bootstrap -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-2">
-      <form action="../auth/autenticar.php" method="post" class="p-4">
-        <div class="modal-header border-0">
-          <h5 class="modal-title w-100 text-center" id="loginModalLabel" style="color:#41663C;">Iniciar Sesión</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="correo" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="correo" name="correo" required>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-          </div>
-        </div>
-        <div class="modal-footer border-0 flex-column">
-          <button type="submit" class="btn btn-custom w-100 mb-2">Iniciar Sesión</button>
-          <p class="mb-0">¿No tienes una cuenta? <a href="../auth/registro.html">Regístrate aquí</a></p>
-        </div>
-      </form>
+    <div class="modal-content p-2" id="loginModalContent">
+      <!-- Aquí se cargará el formulario vía JS -->
     </div>
   </div>
 </div>
 
-
-
-
-
-
-<!-- Lógica menú usuario -->
+<!-- Script de usuario -->
 <script>
-
-
-
-
-  // Simulación: cambia a true si el usuario está logueado
   const userIsLogged = false;
   const usuarioData = {
     nombre: "Karen",
@@ -226,27 +183,21 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     const usuarioNombre = document.getElementById("usuarioNombre");
-    const usuarioDropdown = document.getElementById("usuarioDropdown");
-    if (userIsLogged) {
-      usuarioNombre.textContent = usuarioData.nombre;
-      usuarioDropdown.innerHTML = `
-        <li><h6 class="dropdown-header">${usuarioData.nombre}</h6></li>
-        <li><span class="dropdown-item-text text-muted" style="font-size: 0.95em;">${usuarioData.email}</span></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="../auth/perfil.html">Mi perfil</a></li>
-        <li><a class="dropdown-item" href="../auth/misReservas.html">Mis reservas</a></li>
-        <li><a class="dropdown-item text-danger" href="#" id="cerrarSesion">Cerrar sesión</a></li>
+    if (!usuarioNombre) return;
+
+    if (!userIsLogged) {
+      usuarioNombre.innerHTML = `
+        <button class="btn btn-custom" type="button" onclick="abrirModal('log')">
+          <i class="fa-solid fa-user-circle me-2"></i> Iniciar sesión
+        </button>
       `;
-      // Acción de cerrar sesión (simulado)
-      document.getElementById("cerrarSesion").onclick = function(e) {
-        e.preventDefault();
-        alert("Sesión cerrada (simulado)");
-        // Aquí tu lógica real de logout
-      };
     } else {
-      usuarioNombre.textContent = "Iniciar sesión";
-      usuarioDropdown.innerHTML = `<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginOpcion">Iniciar sesión</a>
-</li>`;
+      usuarioNombre.innerHTML = `
+        <span class="fw-bold me-2" style="color:#41663C;">
+          <i class="fa-solid fa-user-circle me-2"></i> ${usuarioData.nombre}
+        </span>
+        <button class="btn btn-outline-danger btn-sm" onclick="cerrarSesion()">Cerrar sesión</button>
+      `;
     }
   });
 </script>

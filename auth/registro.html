@@ -1,36 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-</head>
-<body>
-    <form action="../admin/create.php" method="post">
-        <h1>Registro</h1>
+<form action="../admin/create.php" method="post" class="p-4 rounded shadow-sm bg-white" style="max-width: 420px; margin:auto;">
+  <div class="modal-header border-0">
+    <h5 class="modal-title w-100 text-center" id="registroModalLabel" style="color:#41663C;">Registrarse</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+  </div>
 
-        <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo" required>
-        <br>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <br>
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" required>
-        <br>
+  <div class="mb-3">
+    <label for="correo" class="form-label">Correo</label>
+    <input type="email" id="correo" name="correo" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre</label>
+    <input type="text" id="nombre" name="nombre" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="apellido" class="form-label">Apellido</label>
+    <input type="text" id="apellido" name="apellido" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Contraseña</label>
+    <input type="password" id="password" name="password" class="form-control" required>
+  </div>
+  <!-- Si quieres usar la confirmación de contraseña:
+  <div class="mb-3">
+    <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+  </div>
+  -->
 
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
+  <div class="d-grid mb-2">
+    <button type="submit" class="btn btn-custom btn-lg">Registrarse</button>
+  </div>
 
-        <!-- <label for="confirmPassword">Confirmar Contraseña:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
-        <br> -->
-
-        <button type="submit">Registrarse</button>
-        <br>
-
-        <p>¿Ya tienes una cuenta? <a href="form-login.html">Inicia sesión aquí</a></p>
-    </form>
-</body>
-</html>
+  <p class="text-center mt-2 mb-0">
+    ¿Ya tienes una cuenta?
+    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Inicia sesión aquí</a>
+  </p>
+</form>
