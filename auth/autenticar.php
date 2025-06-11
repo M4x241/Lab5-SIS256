@@ -11,14 +11,14 @@ $correo = $_POST['correo'];
 $password = sha1($_POST['password']); // Considera usar password_hash y password_verify más adelante
 
 // ✅ CORREGIR LA CONSULTA SQL
-$stmt = $con->prepare('SELECT correo, nombre, apellido, rol FROM usuarios WHERE correo = ? AND password = ?');
+$stmt = $con->prepare('SELECT id, correo, nombre, apellido, rol FROM usuarios WHERE correo = ? AND password = ?');
 $stmt->bind_param("ss", $correo, $password);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $usuario = $result->fetch_assoc();
-    
+    $_SESSION['id'] = $usuario['id'];
     $_SESSION['correo'] = $usuario['correo'];
     $_SESSION['nombre'] = $usuario['nombre'];
     $_SESSION['rol'] = $usuario['rol'];
