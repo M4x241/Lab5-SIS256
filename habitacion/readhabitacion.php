@@ -14,9 +14,11 @@ $sql = "SELECT
 h.id,
     h.numero AS numero_habitacion,
     h.piso,
+    h.estado,
     t.nombre AS tipo_nombre,
     t.superficie,
-    t.nro_camas
+    t.nro_camas,
+    t.precio
 FROM 
     habitaciones h
 JOIN 
@@ -33,7 +35,9 @@ while ($row = mysqli_fetch_array($resultado)) {
         "piso" => $row['piso'],
         "tipo_nombre" => $row['tipo_nombre'],
         "superficie" => $row['superficie'],
-        "nro_camas" => $row['nro_camas']
+        "nro_camas" => $row['nro_camas'],
+        'precio'=> $row['precio'],
+        'estado'=> $row['estado'],
     ];
 }
 
