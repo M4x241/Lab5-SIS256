@@ -16,7 +16,7 @@ if (ini_get("session.use_cookies")) {
 // Finalmente, destruir la sesión
 session_destroy();
 
-// Redirigir a la página principal
-header("Location: ../index.html");
-exit;
+// Devolver respuesta JSON en lugar de redireccionar
+header('Content-Type: application/json');
+echo json_encode(['success' => true, 'message' => 'Sesión cerrada correctamente']);
 ?>

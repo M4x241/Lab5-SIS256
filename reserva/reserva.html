@@ -1,45 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>reserva</title>
-</head>
-<body>
-    <form action="">
-        <h1>Reserva de Habitacion</h1>
-
-        <label for="checkin">Fecha de entrada:</label>
-        <input type="date" id="checkin" name="checkin" required>
-
-        <br>
-
-        <label for="checkout">Fecha de salida:</label>
-        <input type="date" id="checkout" name="checkout" required>
-
-        <br>
-
-        <label for="totalPrice">Precio total</label> <p id="price"></p>
-
-        <br>
-
-        <label for="paymentMethod">Método de pago:</label>
-        <select id="paymentMethod" name="paymentMethod" required>
-            <option value="creditCard">Tarjeta de crédito</option>
-            <option value="debitCard">Tarjeta de débito</option>
-            <option value="paypal">PayPal</option>
-            <option value="bankTransfer">Transferencia bancaria</option>
-            <option value="cash">Efectivo</option>
-        </select>
-        <br>
-        <button type="submit">Reservar</button>
-
-    </form>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            cargarContenido('header');
-            cargarContenido('footer');
-        });
-    </script>
-</body>
-</html>
+<form action="" class="p-4">
+        <div class="modal-header border-0">
+          <h5 class="modal-title w-100 text-center" id="loginModalLabel" style="color:#41663C;">Reserva habitacion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="checkin">Fecha de entrada:</label>
+            <input type="date" id="checkin" name="checkin" required>
+          </div>
+        <div class="mb-3">
+                <label for="roomType">Tipo de habitación:</label>
+                <select id="roomType" name="roomType" required>
+                    <option value="single">Habitación Simple</option>
+                    <option value="double">Habitación Doble</option>
+                    <option value="suite">Suite Familiar</option>
+                </select>
+        </div>
+          <div class="mb-3">
+            <label for="checkout">Fecha de salida:</label>
+            <input type="date" id="checkout" name="checkout" required>
+          </div>
+          <div class="mb-3">
+            <label for="totalPrice">Precio total</label> <p id="price"></p>
+          </div>
+          <div class="mb-3">
+            <label for="paymentMethod">Método de pago:</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="creditCard">Tarjeta de crédito</option>
+                    <option value="debitCard">Tarjeta de débito</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bankTransfer">Transferencia bancaria</option>
+                    <option value="cash">Efectivo</option>
+                </select>
+          </div>
+        </div>
+        <div class="modal-footer border-0 flex-column">
+          <button type="submit" class="btn btn-custom w-100 mb-2">Reservar</button>
+        </div>
+</form>
