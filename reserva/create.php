@@ -14,8 +14,8 @@ $habitacion_id = $_POST['habitacion_id'];
 
 
 // Insertar nuevo usuario
-$stmt = $con->prepare("INSERT INTO habitaciones(numero, piso,id_tipoHabitacion) VALUES (?, ?,?)");
-$stmt->bind_param("ssi", $numero,$piso,$id_tipoHabitacion);
+$stmt = $con->prepare("INSERT INTO reservas(fecha_ingreso, fecha_salida,usuario_id,habitacion_id ) VALUES (?, ?,?,?)");
+$stmt->bind_param("ssii", $fecha_ingreso,$fecha_salida,$usuario_id,$habitacion_id);
 
 if ($stmt->execute()) {
     echo "habitacion creada correctamente";
