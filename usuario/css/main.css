@@ -90,3 +90,21 @@
     }
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+#contenido {
+    flex: 1 0 auto; /* Esto hace que el contenido crezca y empuje el footer abajo */
+}
+
+.footer {
+    flex-shrink: 0; /* Evita que el footer se achique o se meta hacia arriba */
+}
