@@ -47,10 +47,18 @@
     width: 100%;
 }
 
-.galeria-img img:hover {
-    transform: scale(1.04);
-    box-shadow: 0 8px 32px rgba(65, 102, 60, 0.15);
+.galeria-img {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  border: 2px solid transparent;
 }
+
+.galeria-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border: 2px solid #41663C;
+}
+
 
 .card-title i {
     color: #41663C !important;
@@ -88,5 +96,19 @@
     .galeria-img img {
         height: 120px;
     }
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card .card-img-top {
+  height: 250px;
+  object-fit: cover;
+}
+
+.card:hover {
+  transform: scale(1.09);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 

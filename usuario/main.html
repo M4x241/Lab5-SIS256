@@ -53,24 +53,30 @@
   <div class="container">
     <h2 class="mb-4 text-center fw-bold" style="color:#41663C;">Nuestras Habitaciones</h2>
     <div class="row g-4 justify-content-center">
+
       <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0">
+        <div class="card h-100 shadow-sm border-0" onclick="abrirModal('simple')">
+          <img src="img/simple.jpg" class="card-img-top" alt="Habitación Simple">
           <div class="card-body">
             <h5 class="card-title fw-bold" style="color:#41663C;"><i class="fa-solid fa-bed me-2"></i>Habitación Simple</h5>
             <p class="card-text">Ideal para viajeros solitarios o de negocios.</p>
           </div>
         </div>
       </div>
+
       <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0">
+        <div class="card h-100 shadow-sm border-0" onclick="abrirModal('doble')">
+          <img src="img/doble.jpg" class="card-img-top" alt="Habitación Doble">
           <div class="card-body">
             <h5 class="card-title fw-bold" style="color:#41663C;"><i class="fa-solid fa-person-half-dress me-2"></i>Habitación Doble</h5>
             <p class="card-text">Perfecta para parejas o amigos.</p>
           </div>
         </div>
       </div>
+
       <div class="col-md-4">
-        <div class="card h-100 shadow-sm border-0">
+        <div class="card h-100 shadow-sm border-0" onclick="abrirModal('familiar')">
+          <img src="img/familiar.jpeg" class="card-img-top" alt="Suite Familiar">
           <div class="card-body">
             <h5 class="card-title fw-bold" style="color:#41663C;"><i class="fa-solid fa-people-roof me-2"></i>Suite Familiar</h5>
             <p class="card-text">Comodidad para toda la familia.</p>
@@ -81,6 +87,7 @@
   </div>
 </section>
 
+
 <!-- SECCIÓN GALERÍA -->
 <section id="galeria" class="py-5">
   <div class="container">
@@ -88,17 +95,17 @@
     <div class="row g-3 justify-content-center">
       <div class="col-6 col-md-4 col-lg-3">
         <div class="galeria-img rounded shadow-sm overflow-hidden">
-          <img src="img/decorar-recepcion-hotel.jpg" class="img-fluid" alt="Recepción">
+          <img src="img/decorar-recepcion-hotel.jpg" class="img-fluid" alt="Recepción" onclick="abrirModal(alt)">
         </div>
       </div>
       <div class="col-6 col-md-4 col-lg-3">
         <div class="galeria-img rounded shadow-sm overflow-hidden">
-          <img src="img/piscina-descanso.jpg" class="img-fluid" alt="Piscina">
+          <img src="img/piscina-descanso.jpg" class="img-fluid" alt="Piscina" onclick="abrirModal(alt)">
         </div>
       </div>
       <div class="col-6 col-md-4 col-lg-3">
         <div class="galeria-img rounded shadow-sm overflow-hidden">
-          <img src="img/Suite-Hotel-Fariones-Playa-Lanzarote.jpg" class="img-fluid" alt="Habitación">
+          <img src="img/Suite-Hotel-Fariones-Playa-Lanzarote.jpg" class="img-fluid" alt="Habitación" onclick="abrirModal(alt)">
         </div>
       </div>
     </div>
@@ -174,29 +181,5 @@
   </div>
 </div>
 
-<!-- Script de usuario -->
-<script>
-   const userIsLogged = false;
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const usuarioNombre = document.getElementById("usuarioNombre");
-    if (!usuarioNombre) return;
-
-    if (!userIsLogged) {
-      usuarioNombre.innerHTML = `
-        <button class="btn btn-custom" type="button" onclick="abrirModal('log')">
-          <i class="fa-solid fa-user-circle me-2"></i> Iniciar sesión
-        </button>
-      `;
-    } else {
-      usuarioNombre.innerHTML = `
-        <span class="fw-bold me-2" style="color:#41663C;">
-          <i class="fa-solid fa-user-circle me-2"></i> ${usuarioData.nombre}
-        </span>
-        <button class="btn btn-outline-danger btn-sm" onclick="cerrarSesion()">Cerrar sesión</button>
-      `;
-    }
-  });
-</script>
 </body>
 </html>

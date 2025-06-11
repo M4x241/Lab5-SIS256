@@ -21,7 +21,8 @@ while ($row = mysqli_fetch_array($resultado)) {
         "id" => $row['id'],
         "nombre" => $row['nombre'],
         "superficie" => $row['superficie'],
-        "nro_camas" => $row['nro_camas']
+        "nro_camas" => $row['nro_camas'],
+        "precio" => $row['precioBS'] ?? 0 // Asegurando que precio tenga un valor por defecto
     ];
 }
 

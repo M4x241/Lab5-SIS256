@@ -21,6 +21,7 @@ if ($result->num_rows > 0) {
     
     $_SESSION['correo'] = $usuario['correo'];
     $_SESSION['nombre'] = $usuario['nombre'];
+    $_SESSION['apellido'] = $usuario['apellido'];
     $_SESSION['rol'] = $usuario['rol'];
 
     // Redirigir según el rol
