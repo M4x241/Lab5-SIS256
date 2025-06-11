@@ -15,7 +15,6 @@ function mostrarHabitaciones() {
     .then((response) => response.text())
     .then((html) => {
       document.getElementById("contenido").innerHTML = html;
-      document.getElementById("titulo_seccion").innerHTML = "Dashboard";
       dasboard();
     })
     .catch((error) => {
@@ -28,7 +27,6 @@ function mostrarUsuarios() {
     .then((response) => response.text())
     .then((html) => {
       document.getElementById("contenido").innerHTML = html;
-      document.getElementById("titulo_seccion").innerHTML = "Usuarios";
     
       cargarUsuarios();
     })
@@ -36,3 +34,4 @@ function mostrarUsuarios() {
       console.error("Error al cargar el contenido:", error);
     });
 }
+

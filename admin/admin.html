@@ -59,7 +59,7 @@
   <body>
     <div class="header">
       <div class="d-flex align-items-center">
-        <img src="logo.png" alt="Logo" />
+        <img src="../assets/logo.png" alt="Logo" style="height:50px; width:50px; object-fit:cover; border-radius:50%;" />
         <h1>Mi Empresa</h1>
       </div>
     </div>
@@ -80,15 +80,279 @@
           Eventos
         </button>
       </div>
-      <div class="main-content">
-        <h3 id="titulo_seccion">Dashboard</h3>
+      <div class="main-content " >
         <div id="contenido" class="contenido"></div>
       </div>
     </div>
   </body>
-  <script src="dashboard.js?v1=5"></script>
-  <script src="components.js?v1=34"></script>
+  <!-- Modal para editar usuarios -->
+  <div
+    class="modal fade"
+    id="editarUsuarioModal"
+    tabindex="-1"
+    aria-labelledby="editarUsuarioLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarUsuarioLabel">Editar Usuario</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Cerrar"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditarUsuario">
+            <div class="mb-3">
+              <label for="usuarioNombre" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="usuarioNombre"
+                required
+              />
+            </div>
+            <!-- apellido -->
+            <div class="mb-3">
+              <label for="usuarioApellido" class="form-label">Apellido</label>
+              <input
+                type="text"
+                class="form-control"
+                id="usuarioApellido"
+                required
+              />
+            </div>
 
-  <script src="admin.js?v1=234">
+            <div class="mb-3">
+              <label for="usuarioEmail" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="usuarioEmail"
+                required
+              />
+            </div>
+            <!-- Agrega más campos según sea necesario -->
+            <input type="hidden" id="usuarioId" />
+            <input type="hidden" id="usuarioPassword" />
+
+            <div class="mb-3">
+              <label for="usuarioRol" class="form-label">Rol</label>
+              <select class="form-select" id="usuarioRol">
+                <option value="admin">Administrador</option>
+                <option value="user">Usuario</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            form="formEditarUsuario"
+            onclick="updateUser()"
+          >
+            Guardar Cambios
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal para anadir habitacion -->
+  <div
+    class="modal fade"
+    id="anadirHabitacionModal"
+    tabindex="-1"
+    aria-labelledby="anadirHabitacionLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="anadirHabitacionLabel">Añadir Habitación</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Cerrar"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="formAnadirHabitacion">
+            <div class="mb-3">
+              <label for="habitacionNumero" class="form-label">Número</label>
+              <input
+                type="text"
+                class="form-control"
+                id="habitacionNumero"
+                required
+              />
+            </div>
+            <!-- piso -->
+            <div class="mb-3">
+              <label for="habitacionPiso" class="form-label">Piso</label>
+              <input
+                type="number"
+                class="form-control"
+                id="habitacionPiso"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="habitacionTipo" class="form-label">Tipo</label>
+              <select class="form-select" id="habitacionTipo">
+                <option value=1>Simple</option>
+                <option value=2>Doble</option>
+                <option value=3>Suite</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="habitacionEstado" class="form-label">Estado</label>
+              <select class="form-select" id="habitacionEstado">
+                <option value="disponible">Disponible</option>
+                <option value="ocupada">Ocupada</option>
+                <option value="mantenimiento">Mantenimiento</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="habitacionPrecio" class="form-label">Precio</label>
+              <input
+                type="number"
+                class="form-control"
+                id="habitacionPrecio"
+                required
+              />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            form="formAnadirHabitacion"
+            onclick="addRoom()"
+          >
+            Añadir Habitación
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function abrirModalEditarUsuario(usuario) {
+      // usuario: objeto con datos del usuario a editar
+      document.getElementById("usuarioId").value = usuario.id || "";
+      document.getElementById("usuarioNombre").value = usuario.nombre || "";
+      document.getElementById("usuarioEmail").value = usuario.correo || "";
+      document.getElementById("usuarioRol").value = usuario.rol || "user";
+      document.getElementById("usuarioPassword").value = usuario.password || "";
+      document.getElementById("usuarioApellido").value = usuario.apellido || "";
+      var modal = new bootstrap.Modal(
+        document.getElementById("editarUsuarioModal")
+      );
+      modal.show();
+    }
+    function updateUser() {
+      const id = document.getElementById("usuarioId").value;
+      const nombre = document.getElementById("usuarioNombre").value;
+      const apellido = document.getElementById("usuarioApellido").value;
+      const email = document.getElementById("usuarioEmail").value;
+      const rol = document.getElementById("usuarioRol").value;
+      const password = document.getElementById("usuarioPassword").value;
+      // Aquí puedes agregar la lógica para enviar los datos al servidor
+      console.log(
+        `Actualizando ${id}: ${nombre} ${apellido}, ${email}, Rol: ${rol}`,
+        `Password: ${password}`
+      );
+      // usar ajax para enviar los datos al servidor
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "update.php", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          if (response.success) {
+            alert("Usuario actualizado correctamente");
+            menuAdmin("habitaciones");
+          } else {
+            alert("Error al actualizar el usuario: " + response.message);
+          }
+        }
+      };
+      xhr.send(
+        JSON.stringify({
+          id: id,
+          nombre: nombre,
+          apellido: apellido,
+          correo: email,
+          rol: rol,
+          password: password,
+        })
+      );
+    }
+    function addRoom() {
+  const numero = document.getElementById("habitacionNumero").value;
+  const tipo = document.getElementById("habitacionTipo").value;
+  const estado = document.getElementById("habitacionEstado").value;
+  const precio = document.getElementById("habitacionPrecio").value;
+  const piso = document.getElementById("habitacionPiso").value;
+
+  console.log(`Añadiendo habitación: ${numero}, Tipo: ${tipo}, Estado: ${estado}, Precio: ${precio}, Piso: ${piso}`);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "../habitacion/createHabitacion.php", true);
+
+  // No establezcas manualmente Content-Type cuando usas FormData
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        alert(xhr.responseText); // para depurar la respuesta exacta
+        if (xhr.responseText.includes("correctamente")) {
+          alert("Habitación añadida correctamente");
+          menuAdmin("habitaciones");
+        } else {
+          alert("Error al añadir la habitación: " + xhr.responseText);
+        }
+      } else {
+        console.error("Error del servidor:", xhr.status, xhr.statusText);
+        alert("Error del servidor: " + xhr.status);
+      }
+    }
+
+  };
+
+  const formdata = new FormData();
+  formdata.append("numero", numero);
+  formdata.append("tipo_id", tipo);
+  formdata.append("estado", estado);
+  formdata.append("precio", precio);
+  formdata.append("piso", piso);
+
+  xhr.send(formdata);
+}
+
+    
   </script>
+  <script src="dashboard.js?v1=5"></script>
+  <script src="components.js?v1=54"></script>
+
+  <script src="admin.js?v1=234"></script>
 </html>
