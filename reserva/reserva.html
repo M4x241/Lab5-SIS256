@@ -1,4 +1,4 @@
-<form action="" class="p-4">
+<form class="p-4" id="formReserva">
         <div class="modal-header border-0">
           <h5 class="modal-title w-100 text-center" id="loginModalLabel" style="color:#41663C;">Reserva habitacion</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -20,6 +20,11 @@
             <label for="checkout">Fecha de salida:</label>
             <input type="date" id="checkout" name="checkout" required>
           </div>
+          <div class="mb-3">
+  <label for="roomQuantity">Cantidad de habitaciones:</label>
+  <input type="number" id="roomQuantity" name="roomQuantity" min="1" value="1" required>
+</div>
+
           <div class="mb-3">
             <label for="totalPrice">Precio total</label> <p id="price"></p>
           </div>

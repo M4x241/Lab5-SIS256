@@ -10,6 +10,7 @@ require '../core/verificarRol.php'; */
 $nombre = $_POST['nombre'];
 $superficie=$_POST['superficie'];
 $nro_camas =$_POST['nro_camas'];
+$precioBS = $_POST['precioBS'] ?? 0; // Asegurando que precio tenga un valor por defecto
 
 
 // Insertar nuevo usuario

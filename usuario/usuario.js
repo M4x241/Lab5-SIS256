@@ -1,5 +1,11 @@
 // Función para abrir el modal de login o registro
 let usuarioActual = null; 
+const preciosHabitacion = {
+  single: 50,   // dólares por noche
+  double: 80,
+  suite: 120
+};
+
 
 function abrirModal(tipo) {
   const modalContent = document.getElementById("loginModalContent")
@@ -27,16 +33,61 @@ function abrirModal(tipo) {
         console.error("Error al cargar el formulario:", error)
       })
   } else if (tipo === "re") {
-    fetch("../reserva/reserva.html")
-      .then((res) => res.text())
-      .then((html) => {
-        modalContent.innerHTML = html
-        modal.show()
-      })
-      .catch((error) => {
-        console.error("Error al cargar el formulario de reserva:", error)
-      })
-    } ////HABITACIONES
+  fetch("../reserva/reserva.html")
+    .then((res) => res.text())
+    .then((html) => {
+      modalContent.innerHTML = html;
+      modal.show();
+
+      setTimeout(() => {
+  const form = document.getElementById("formReserva");
+  if (form) {
+    const checkin = document.getElementById("checkin");
+    const checkout = document.getElementById("checkout");
+    const roomType = document.getElementById("roomType");
+    const quantity = document.getElementById("roomQuantity");
+    const priceDisplay = document.getElementById("price");
+
+    function calcularPrecio() {
+      const fechaEntrada = new Date(checkin.value);
+      const fechaSalida = new Date(checkout.value);
+      const noches = (fechaSalida - fechaEntrada) / (1000 * 60 * 60 * 24);
+      const tipo = roomType.value;
+      const cantidad = parseInt(quantity.value) || 1;
+
+      if (noches > 0 && preciosHabitacion[tipo]) {
+        const total = noches * preciosHabitacion[tipo] * cantidad;
+        priceDisplay.textContent = `$${total.toFixed(2)} USD`;
+      } else {
+        priceDisplay.textContent = "Selecciona fechas válidas.";
+      }
+    }
+
+    checkin.addEventListener("change", calcularPrecio);
+    checkout.addEventListener("change", calcularPrecio);
+    roomType.addEventListener("change", calcularPrecio);
+    quantity.addEventListener("input", calcularPrecio);
+
+    calcularPrecio(); // Inicial
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      form.innerHTML = `
+        <div class="text-center p-4">
+          <h5 class="text-success">✅ ¡Reserva realizada con éxito!</h5>
+          <p>Tu reserva de <strong>${quantity.value}</strong> habitación(es) ${roomType.options[roomType.selectedIndex].text.toLowerCase()} fue registrada.</p>
+          <button class="btn btn-outline-secondary mt-3" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      `;
+    });
+  }
+}, 100);
+    })
+    .catch((error) => {
+      console.error("Error al cargar el formulario de reserva:", error);
+    });
+}
+ ////HABITACIONES
   else if (tipo == "simple") {
   html = `
     <div class="modal-header border-0">
