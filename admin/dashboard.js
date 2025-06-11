@@ -148,14 +148,16 @@ function cargarHabitaciones() {
       console.log(data);
       const tbody = document.querySelector("tbody");
       tbody.innerHTML = ""; // Limpiar el contenido actual
+      let i = 0;
       data.forEach((habitacion) => {
         const tr = document.createElement("tr");
+        i++;
         tr.innerHTML = `
-              <td>${habitacion.id}</td>
+              <td>${i}</td>
               <td>${habitacion.numero}</td>
               <td>${habitacion.tipo_nombre}</td>
               <td><span class="badge ${
-                habitacion.estado === "Disponible" ? "bg-success" : "bg-danger"
+                habitacion.estado === "DISPONIBLE" ? "bg-success" : "bg-danger"
               }">${habitacion.estado}</span></td>
               <td>Bs. ${habitacion.precio}</td>
               <td>

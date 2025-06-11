@@ -37,9 +37,9 @@ $stmt = $con->prepare("INSERT INTO habitaciones(numero, piso,id_tipoHabitacion) 
 $stmt->bind_param("ssi", $numero,$piso,$id_tipoHabitacion);
 
 if ($stmt->execute()) {
-    echo "habitacion creada correctamente";
+    echo json_encode(['success' => 'Habitacion creada correctamente']);
 } else {
-    echo "Error: " . $stmt->error;
+    echo json_encode(['error' => 'Error al crear la habitacion: ' . $stmt->error]);
 }
 
 $stmt->close();

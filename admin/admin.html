@@ -59,7 +59,16 @@
   <body>
     <div class="header">
       <div class="d-flex align-items-center">
-        <img src="../assets/logo.png" alt="Logo" style="height:50px; width:50px; object-fit:cover; border-radius:50%;" />
+        <img
+          src="../assets/logo.png"
+          alt="Logo"
+          style="
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+          "
+        />
         <h1>Mi Empresa</h1>
       </div>
     </div>
@@ -80,7 +89,7 @@
           Eventos
         </button>
       </div>
-      <div class="main-content " >
+      <div class="main-content">
         <div id="contenido" class="contenido"></div>
       </div>
     </div>
@@ -179,7 +188,9 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="anadirHabitacionLabel">Añadir Habitación</h5>
+          <h5 class="modal-title" id="anadirHabitacionLabel">
+            Añadir Habitación
+          </h5>
           <button
             type="button"
             class="btn-close"
@@ -211,17 +222,16 @@
             <div class="mb-3">
               <label for="habitacionTipo" class="form-label">Tipo</label>
               <select class="form-select" id="habitacionTipo">
-                <option value=1>Simple</option>
-                <option value=2>Doble</option>
-                <option value=3>Suite</option>
+                <option value="1">Simple</option>
+                <option value="2">Doble</option>
+                <option value="3">Suite</option>
               </select>
             </div>
             <div class="mb-3">
               <label for="habitacionEstado" class="form-label">Estado</label>
               <select class="form-select" id="habitacionEstado">
-                <option value="disponible">Disponible</option>
-                <option value="ocupada">Ocupada</option>
-                <option value="mantenimiento">Mantenimiento</option>
+                <option value="DISPONIBLE">DISPONIBLE</option>
+                <option value="MANTENIMIENTO">MANTENIMIENTO</option>
               </select>
             </div>
             <div class="mb-3">
@@ -308,48 +318,31 @@
       );
     }
     function addRoom() {
-  const numero = document.getElementById("habitacionNumero").value;
-  const tipo = document.getElementById("habitacionTipo").value;
-  const estado = document.getElementById("habitacionEstado").value;
-  const precio = document.getElementById("habitacionPrecio").value;
-  const piso = document.getElementById("habitacionPiso").value;
+      event.preventDefault();
+      const numero = document.getElementById("habitacionNumero").value;
+      const tipo = document.getElementById("habitacionTipo").value;
+      const estado = document.getElementById("habitacionEstado").value;
+      const precio = document.getElementById("habitacionPrecio").value;
+      const piso = document.getElementById("habitacionPiso").value;
 
-  console.log(`Añadiendo habitación: ${numero}, Tipo: ${tipo}, Estado: ${estado}, Precio: ${precio}, Piso: ${piso}`);
-
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "../habitacion/createHabitacion.php", true);
-
-  // No establezcas manualmente Content-Type cuando usas FormData
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        alert(xhr.responseText); // para depurar la respuesta exacta
-        if (xhr.responseText.includes("correctamente")) {
-          alert("Habitación añadida correctamente");
-          menuAdmin("habitaciones");
-        } else {
-          alert("Error al añadir la habitación: " + xhr.responseText);
-        }
-      } else {
-        console.error("Error del servidor:", xhr.status, xhr.statusText);
-        alert("Error del servidor: " + xhr.status);
-      }
+      const formdata = new FormData();
+      formdata.append("numero", numero);
+      formdata.append("tipo_id", tipo);
+      formdata.append("estado", estado);
+      formdata.append("precio", precio);
+      formdata.append("piso", piso);
+      fetch("createHabitacion.php", {
+        method: "POST",
+        body: formdata,
+      })
+        .then((response) => response.json()) // o .json() si devuelves JSON
+        .then((resultado) => {
+          alert("Respuesta del servidor: " + resultado.success);
+        })
+        .catch((error) => {
+          alert("Error en la solicitud: " + error);
+        });
     }
-
-  };
-
-  const formdata = new FormData();
-  formdata.append("numero", numero);
-  formdata.append("tipo_id", tipo);
-  formdata.append("estado", estado);
-  formdata.append("precio", precio);
-  formdata.append("piso", piso);
-
-  xhr.send(formdata);
-}
-
-    
   </script>
   <script src="dashboard.js?v1=5"></script>
   <script src="components.js?v1=54"></script>
