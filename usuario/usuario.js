@@ -23,6 +23,16 @@ function abrirModal(tipo = "log") {
       .catch((error) => {
         console.error("Error al cargar el formulario:", error)
       })
+  } else if (tipo === "re") {
+    fetch("../reserva/reserva.html")
+      .then((res) => res.text())
+      .then((html) => {
+        modalContent.innerHTML = html
+        modal.show()
+      })
+      .catch((error) => {
+        console.error("Error al cargar el formulario de reserva:", error)
+      })
   }
 }
 
@@ -32,6 +42,8 @@ function verificarSesion() {
     .then((response) => response.json())
     .then((data) => {
       const usuarioNombre = document.getElementById("usuarioNombre")
+      const reservabtn = document.getElementById("reservabtn")
+      const reservalnk = document.getElementById("reservalnk")
       if (!usuarioNombre) return
 
       if (data.autenticado) {
@@ -49,6 +61,12 @@ function verificarSesion() {
             </ul>
           </div>
         `
+        reservabtn.innerHTML = `<a class="nav-link" href="#" onclick=" abrirModal('re')">Reservar</a>
+        `
+        reservalnk.setAttribute("onclick", "abrirModal('re')")
+      
+      
+      
       } else {
         // Usuario no autenticado - mostrar botón de inicio de sesión
         usuarioNombre.innerHTML = `

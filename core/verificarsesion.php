@@ -9,7 +9,7 @@ if (isset($_SESSION['correo']) && isset($_SESSION['nombre'])) {
         'autenticado' => true,
         'nombre' => $_SESSION['nombre'],
         'correo' => $_SESSION['correo'],
-        'rol' => $_SESSION['rol']
+        'rol' => $_SESSION['rol'] ?? 'user'
     ]);
 } else {
     // Usuario no autenticado
