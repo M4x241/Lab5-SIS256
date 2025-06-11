@@ -14,94 +14,44 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/main.css" />
-  </head>
-  <body style="background: #f7faf6" onload="cargarContenReservas()">
-    <!-- HEADER (Navbar) -->
-    <nav
-      class="navbar navbar-expand-lg sticky-top shadow-sm"
-      style="background: #fff"
-    >
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-          <i
-            class="fa-solid fa-hotel"
-            style="color: #41663c; font-size: 2rem"
-          ></i>
-          <span class="fw-bold" style="color: #41663c">Hotel Paraíso</span>
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNavbar"
-          aria-controls="mainNavbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="mainNavbar"
-        >
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-            <li class="nav-item">
-              <a class="nav-link" href="#habitaciones">Habitaciones</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#servicios">Servicios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#galeria">Galería</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contacto">Contacto</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:mostrarTpoHabitaciones()"
-                >Reservar</a
-              >
-            </li>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body style="background: #f7faf6;">
+<!-- HEADER (Navbar) -->
+<nav class="navbar navbar-expand-lg sticky-top shadow-sm" style="background: #fff;">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <i class="fa-solid fa-hotel" style="color: #41663C; font-size: 2rem;"></i>
+      <span class="fw-bold" style="color: #41663C;">Hotel Paraíso</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#habitaciones">Habitaciones</a></li>
+        <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link" href="../auth/inicioSesion.html">Reservar</a></li>
+      </ul>
+      <!-- Usuario: Desplegable -->
+      <ul class="navbar-nav ms-3">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user-circle" style="font-size: 1.5rem;"></i>
+            <span class="d-none d-lg-inline" id="usuarioNombre">Iniciar sesión</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow" id="usuarioDropdown">
+            <!-- Cambia con JS -->
+            <li><a class="dropdown-item" href="../auth/form-login.html" id="loginOpcion">Iniciar sesión</a></li>
           </ul>
-          <!-- Usuario: Desplegable -->
-          <ul class="navbar-nav ms-3">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle d-flex align-items-center gap-2"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i
-                  class="fa-solid fa-user-circle"
-                  style="font-size: 1.5rem"
-                ></i>
-                <span class="d-none d-lg-inline" id="usuarioNombre"
-                  >Iniciar sesión</span
-                >
-              </a>
-              <ul
-                class="dropdown-menu dropdown-menu-end shadow"
-                id="usuarioDropdown"
-              >
-                <!-- Cambia con JS -->
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="../auth/form-login.html"
-                    id="loginOpcion"
-                    >Iniciar sesión</a
-                  >
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <div id="contenido">
       <!-- BANNER PRINCIPAL -->
@@ -263,7 +213,11 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="reserva.js"></script>
+
+
+
+
+
 
     <!-- Lógica menú usuario -->
     <script>
@@ -287,19 +241,17 @@
         <li><a class="dropdown-item" href="../auth/misReservas.html">Mis reservas</a></li>
         <li><a class="dropdown-item text-danger" href="#" id="cerrarSesion">Cerrar sesión</a></li>
       `;
-          // Acción de cerrar sesión (simulado)
-          document.getElementById("cerrarSesion").onclick = function (e) {
-            e.preventDefault();
-            alert("Sesión cerrada (simulado)");
-            // Aquí tu lógica real de logout
-          };
-        } else {
-          usuarioNombre.textContent = "Iniciar sesión";
-          usuarioDropdown.innerHTML = `<li><a class="dropdown-item" href="../auth/form-login.html" id="loginOpcion">Iniciar sesión</a></li>`;
-        }
-      });
-
-      cargar();
-    </script>
-  </body>
+      // Acción de cerrar sesión (simulado)
+      document.getElementById("cerrarSesion").onclick = function(e) {
+        e.preventDefault();
+        alert("Sesión cerrada (simulado)");
+        // Aquí tu lógica real de logout
+      };
+    } else {
+      usuarioNombre.textContent = "Iniciar sesión";
+      usuarioDropdown.innerHTML = `<li><a class="dropdown-item" href="../auth/form-login.html" id="loginOpcion">Iniciar sesión</a></li>`;
+    }
+  });
+</script>
+</body>
 </html>
