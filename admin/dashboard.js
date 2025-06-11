@@ -124,29 +124,56 @@ function tablahabitaciones() {
   }%" aria-valuenow="${contarman}" aria-valuemin="0" aria-valuemax="${total}"></div>
 </div>
 `;
-
-  html2 = `
-      <br><br><br>
-
-<table class="table table-striped table-bordered">
-    <tr>
-`;
-  for (let i = 0; i < habitaciones.length; i++) {
-    if ((i + 1) % 2 == 0) {
-      html += `
-        </tr><tr>
-        `;
+  fetch("components/Hgeneral.html")
+    .then((response) => response.text())
+    .then((html2) => {
+      html += html2;
+      document.getElementById("tabla").innerHTML = html;
+      // document.getElementById("tabla").innerHTML = html;
     }
-    html2 += `
-        <td class="${habitaciones[i].estado}">${habitaciones[i].habitacion}</td>
-    `;
-  }
-  html2 += `
-    </tr>
-</table>
-`;
-  html += html2;
-  document.getElementById("tabla").innerHTML = html;
+  )
+    .catch((error) => {
+      console.error("Error al cargar el contenido:", error);
+    }
+  );
+  
+  cargarHabitaciones();
+}
+function cargarHabitaciones() {
+  fetch("../habitacion/readhabitacion.php")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      data = data.datos;
+      console.log(data);
+      const tbody = document.querySelector("tbody");
+      tbody.innerHTML = ""; // Limpiar el contenido actual
+      data.forEach((habitacion) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+              <td>${habitacion.id}</td>
+              <td>${habitacion.numero}</td>
+              <td>${habitacion.tipo_nombre}</td>
+              <td><span class="badge ${
+                habitacion.estado === "Disponible" ? "bg-success" : "bg-danger"
+              }">${habitacion.estado}</span></td>
+              <td>Bs. ${habitacion.precio}</td>
+              <td>
+                  <button class="btn btn-sm btn-primary me-2" onclick="editarHabitacion(${
+                    habitacion.id
+                  })">Editar</button>
+                  <button class="btn btn-sm btn-danger" onclick="eliminarHabitacion(${
+                    habitacion.id
+                  })">Eliminar</button>
+              </td>
+          `;
+        tbody.appendChild(tr);
+      });
+    })
+    .catch((error) =>
+      console.error("Error al cargar las habitaciones:", error)
+    );
+
 }
 
 function tablatipohabitacion() {
@@ -192,6 +219,7 @@ function tablatipohabitacion() {
 function tablafechas() {
   // Implementar la lógica para renderizar la tabla de fechas
   console.log("Renderizando tabla de fechas");
+
   let fechaActual = new Date();
   let mesActual = fechaActual.getMonth();
 

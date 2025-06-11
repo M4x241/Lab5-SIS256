@@ -11,6 +11,11 @@ $numero = $_POST['numero'];
 $piso=$_POST['piso'];
 $id_tipoHabitacion =$_POST['tipo_id'];
 
+if (empty($numero) || empty($piso) || empty($id_tipoHabitacion)) {
+    echo json_encode(['error' => 'Todos los campos son obligatorios']);
+    $con->close();
+    exit;
+}
 
 // Verificar si la habitacion ya existe
 $sql = "SELECT numero,piso FROM habitaciones WHERE numero = ? and piso=?";
@@ -20,7 +25,7 @@ $stmt->execute();
 $stmt->store_result();
 
 if ($stmt->num_rows > 0) {
-    echo 'la habitacion ya existe';
+    echo json_encode(['error' => 'La habitacion ya existe']);
     $stmt->close();
     $conexion->close();
     exit;
@@ -39,3 +44,5 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $con->close();
+
+?>

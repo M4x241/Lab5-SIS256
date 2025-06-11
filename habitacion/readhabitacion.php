@@ -4,6 +4,7 @@
 //me devuelve la convinacion de las tablas de habitacion y tipohabitacion
 
 
+
 session_start();
 
 require '../config/conexion.php';
@@ -19,7 +20,7 @@ h.id,
 FROM 
     habitaciones h
 JOIN 
-    tipoHabitacion t ON h.id_tipoHabitacion = t.id;";
+    tipohabitacion t ON h.id_tipohabitacion = t.id;";
 
 $resultado = $con->query($sql);
 
