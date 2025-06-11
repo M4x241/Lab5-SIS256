@@ -161,9 +161,9 @@ function cargarHabitaciones() {
               }">${habitacion.estado}</span></td>
               <td>Bs. ${habitacion.precio}</td>
               <td>
-                  <button class="btn btn-sm btn-primary me-2" onclick="editarHabitacion(${
+                  <button class="btn btn-sm btn-primary me-2" onclick="editarEstadoHabitacion(${
                     habitacion.id
-                  })">Editar</button>
+                  }, ${habitacion.estado})">Estado</button>
                   <button class="btn btn-sm btn-danger" onclick="eliminarHabitacion(${
                     habitacion.id
                   })">Eliminar</button>

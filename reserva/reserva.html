@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <form class="p-4" id="formReserva">
+=======
+<form action="create.php" class="p-4" method="post">
+>>>>>>> 9e65994 (Hola)
         <div class="modal-header border-0">
           <h5 class="modal-title w-100 text-center" id="loginModalLabel" style="color:#41663C;">Reserva habitacion</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -6,19 +10,15 @@
         <div class="modal-body">
           <div class="mb-3">
             <label for="checkin">Fecha de entrada:</label>
-            <input type="date" id="checkin" name="checkin" required>
+            <input type="date" id="fecha_ingreso" name="checkin" required>
           </div>
         <div class="mb-3">
-                <label for="roomType">Tipo de habitación:</label>
-                <select id="roomType" name="roomType" required>
-                    <option value="single">Habitación Simple</option>
-                    <option value="double">Habitación Doble</option>
-                    <option value="suite">Suite Familiar</option>
-                </select>
+                <label for="roomType">ID habitación:</label>
+                <input type="text" id="habitacion_id" name="roomType" required>
         </div>
           <div class="mb-3">
             <label for="checkout">Fecha de salida:</label>
-            <input type="date" id="checkout" name="checkout" required>
+            <input type="date" id="fecha_salida" name="checkout" required>
           </div>
           <div class="mb-3">
   <label for="roomQuantity">Cantidad de habitaciones:</label>
@@ -37,7 +37,11 @@
                     <option value="cash">Efectivo</option>
                 </select>
           </div>
+          <div class="mb-3">
+            <label for="customerName">Id del cliente:</label>
+            <input type="text" id="usuario_id" name="customerName" required>
         </div>
+
         <div class="modal-footer border-0 flex-column">
           <button type="submit" class="btn btn-custom w-100 mb-2">Reservar</button>
         </div>

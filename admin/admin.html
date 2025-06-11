@@ -82,12 +82,12 @@
         <button class="btn btn-light" onclick="menuAdmin('habitaciones')">
           Habitaciones
         </button>
-        <button class="btn btn-light" onclick="menuAdmin('notificaciones')">
-          Notificaciones
+        <button class="btn btn-light" onclick="menuAdmin('reservas')">
+          Reservaciones
         </button>
-        <button class="btn btn-light" onclick="menuAdmin('eventos')">
+        <!-- <button class="btn btn-light" onclick="menuAdmin('eventos')">
           Eventos
-        </button>
+        </button> -->
       </div>
       <div class="main-content">
         <div id="contenido" class="contenido"></div>
@@ -332,6 +332,22 @@
       formdata.append("precio", precio);
       formdata.append("piso", piso);
       fetch("createHabitacion.php", {
+        method: "POST",
+        body: formdata,
+      })
+        .then((response) => response.json()) // o .json() si devuelves JSON
+        .then((resultado) => {
+          alert("Respuesta del servidor: " + resultado.success);
+        })
+        .catch((error) => {
+          alert("Error en la solicitud: " + error);
+        });
+    }
+    function editarEstadoHabitacion(id,estado){
+      const formdata = new FormData();
+      formdata.append("id", id);
+      formdata.append("estado", estado);
+      fetch("editarestadohabitacion.php", {
         method: "POST",
         body: formdata,
       })
