@@ -2,7 +2,7 @@
 
 ## Integrantes
 
-- **Amurrio Huaygua Karen** – Ingeniero de Componentes y Casos de Uso  
-- **Marin Masti Gustavo** – Analista de Sistemas  
-- **Rodas Palacios Max Jherzon** – Arquitecto de Software
+- **Amurrio Huaygua Karen**
+- **Marin Masti Gustavo**
+- **Rodas Palacios Max Jherzon** 
 
