@@ -15,7 +15,7 @@ function cargarUsuarios() {
             <td>${user.nombre} ${user.apellido}</td>
             <td>${user.correo}</td>
             <td>
-              <button class="btn btn-primary btn-sm" onclick="editUser(${user.id})">Editars</button>
+              <button class="btn btn-primary btn-sm" onclick="editUser(${user.id})">Editar</button>
               <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})">Borrar</button>
             </td>
           `;
@@ -61,10 +61,25 @@ function editUser(id) {
 }
 
 
+
 function abrirModalAnadirHabitacion() {
   document.getElementById("formAnadirHabitacion").reset();
   var modal = new bootstrap.Modal(
     document.getElementById("anadirHabitacionModal")
+  );
+  modal.show();
+}
+
+function abrirModalEditarUsuario(usuario) {
+  // usuario: objeto con datos del usuario a editar
+  document.getElementById("usuarioId").value = usuario.id || "";
+  document.getElementById("usuarioNombre").value = usuario.nombre || "";
+  document.getElementById("usuarioEmail").value = usuario.correo || "";
+  document.getElementById("usuarioRol").value = usuario.rol || "user";
+  document.getElementById("usuarioPassword").value = usuario.password || "";
+  document.getElementById("usuarioApellido").value = usuario.apellido || "";
+  var modal = new bootstrap.Modal(
+    document.getElementById("editarUsuarioModal")
   );
   modal.show();
 }

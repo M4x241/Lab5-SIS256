@@ -1,9 +1,9 @@
 // Función para abrir el modal de login o registro
 let usuarioActual = null; 
 const preciosHabitacion = {
-  single: 50,   // dólares por noche
-  double: 80,
-  suite: 120
+  single: 70.8,   // dólares por noche
+  double: 140.8,
+  suite: 200.0,
 };
 
 

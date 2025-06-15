@@ -6,7 +6,7 @@ require '../config/conexion.php';
 require '../core/verificarRol.php';
 
 
-$sql = "SELECT id,correo,nombre,apellido,rol FROM usuarios";
+$sql = "SELECT * FROM reservas";
 
 $resultado = $con->query($sql);
 
@@ -16,10 +16,11 @@ $arreglo = [];
 while ($row = mysqli_fetch_array($resultado)) {
     $arreglo[] = [
         "id" => $row['id'],
-        "correo" => $row['correo'],
-        "nombre" => $row['nombre'],
-        "apellido" => $row['apellido'],
-        "rol" => $row['rol']
+        "fecha_ingreso" => $row['fecha_ingreso'],
+        "fecha_salida" => $row['fecha_salida'],
+        "usuario_id" => $row['usuario_id'],
+        "habitacion_id" => $row['habitacion_id'],
+        "estado" => $row['estado']
     ];
 }
 

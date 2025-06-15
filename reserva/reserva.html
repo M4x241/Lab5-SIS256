@@ -1,44 +1,44 @@
 <form class="p-4" id="formReserva">
-        <div class="modal-header border-0">
-          <h5 class="modal-title w-100 text-center" id="loginModalLabel" style="color:#41663C;">Reserva habitacion</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="checkin">Fecha de entrada:</label>
-            <input type="date" id="checkin" name="checkin" required>
-          </div>
-        <div class="mb-3">
-                <label for="roomType">Tipo de habitación:</label>
-                <select id="roomType" name="roomType" required>
-                    <option value="single">Habitación Simple</option>
-                    <option value="double">Habitación Doble</option>
-                    <option value="suite">Suite Familiar</option>
-                </select>
-        </div>
-          <div class="mb-3">
-            <label for="checkout">Fecha de salida:</label>
-            <input type="date" id="checkout" name="checkout" required>
-          </div>
-          <div class="mb-3">
-  <label for="roomQuantity">Cantidad de habitaciones:</label>
-  <input type="number" id="roomQuantity" name="roomQuantity" min="1" value="1" required>
+  <div class="modal-header border-0">
+    <h5 class="modal-title w-100 text-center" id="loginModalLabel" style="color:#41663C;">Reserva habitacion</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="checkin">Fecha de entrada:</label>
+      <input type="date" id="checkin" name="checkin" required>
+    </div>
+  <div class="mb-3">
+          <label for="roomType">Tipo de habitación:</label>
+          <select id="roomType" name="roomType" required>
+              <option value="single">Habitación Simple</option>
+              <option value="double">Habitación Doble</option>
+              <option value="suite">Suite Familiar</option>
+          </select>
+  </div>
+    <div class="mb-3">
+      <label for="checkout">Fecha de salida:</label>
+      <input type="date" id="checkout" name="checkout" required>
+    </div>
+    <div class="mb-3">
+<label for="roomQuantity">Cantidad de habitaciones:</label>
+<input type="number" id="roomQuantity" name="roomQuantity" min="1" value="1" required>
 </div>
 
-          <div class="mb-3">
-            <label for="totalPrice">Precio total</label> <p id="price"></p>
-          </div>
-          <div class="mb-3">
-            <label for="paymentMethod">Método de pago:</label>
-                <select id="paymentMethod" name="paymentMethod" required>
-                    <option value="creditCard">Tarjeta de crédito</option>
-                    <option value="debitCard">Tarjeta de débito</option>
-                    <option value="bankTransfer">Transferencia bancaria</option>
-                    <option value="cash">Efectivo</option>
-                </select>
-          </div>
-        </div>
-        <div class="modal-footer border-0 flex-column">
-          <button type="submit" class="btn btn-custom w-100 mb-2">Reservar</button>
-        </div>
+    <div class="mb-3">
+      <label for="totalPrice">Precio total</label> <p id="price"></p>
+    </div>
+    <div class="mb-3">
+      <label for="paymentMethod">Método de pago:</label>
+          <select id="paymentMethod" name="paymentMethod" required>
+              <option value="creditCard">Tarjeta de crédito</option>
+              <option value="debitCard">Tarjeta de débito</option>
+              <option value="bankTransfer">Transferencia bancaria</option>
+              <option value="cash">Efectivo</option>
+          </select>
+    </div>
+  </div>
+  <div class="modal-footer border-0 flex-column">
+    <button type="submit" class="btn btn-custom w-100 mb-2">Reservar</button>
+  </div>
 </form>

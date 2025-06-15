@@ -1,6 +1,6 @@
 <?php
 session_start();
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 
 // Verificar si el usuario está autenticado
 if (isset($_SESSION['correo']) && isset($_SESSION['nombre'])) {
