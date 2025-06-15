@@ -5,4 +5,3 @@
 - **Amurrio Huaygua Karen**
 - **Marin Masti Gustavo**
 - **Rodas Palacios Max Jherzon** 
-
