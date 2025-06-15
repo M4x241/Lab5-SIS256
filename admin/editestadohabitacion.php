@@ -1,26 +1,27 @@
 <?php  session_start();
 require '../config/conexion.php';
-require '../core/verificarsesion.php';
-require '../core/verificarRol.php';
+// require '../core/verificarsesion.php';
+// require '../core/verificarRol.php';
 
-$estado = $_POST['estado'] == 'DISPONIBLE' ? 'DISPONIBLE' : 'MANTENIMIENTO';
+$estado = $_POST['estado'] == 'DISPONIBLE' ? 'MANTENIMIENTO' : 'DISPONIBLE';
 
 
 $id=$_POST['id'];
 
 // Verificar si el ID está vacío
 if (empty($id)) {
-    echo "El ID no puede estar vacío";
+    echo json_encode(['success' => false, 'message' => 'El ID de la habitación no puede estar vacío.']);
     $con->close();
     exit;
 }
+
 // el sql
 $con->query("SET NAMES 'utf8'");
 $sql = "UPDATE habitaciones SET estado = ? WHERE id = ?";
 $stmt = $con->prepare($sql);
 // Verificar si la preparación de la consulta fue exitosa
 if (!$stmt) {
-    echo "Error en la preparación de la consulta: " . $con->error;
+   echo json_encode(['success' => false, 'message' => 'Error al preparar la consulta: ' . $con->error]);
     $con->close();
     exit;
 }

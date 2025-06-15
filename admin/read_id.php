@@ -2,8 +2,8 @@
 session_start();
 
 require '../config/conexion.php';
-require '../core/verificarsesion.php';
-require '../core/verificarRol.php';
+// require '../core/verificarsesion.php';
+// require '../core/verificarRol.php';
 
 $id = $_GET['id'] ?? null;
 $sql = "SELECT id,correo,nombre,apellido,rol,password FROM usuarios WHERE id = $id";

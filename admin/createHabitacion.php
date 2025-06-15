@@ -2,8 +2,8 @@
 //esto permitira crear usuario
 session_start();
 require '../config/conexion.php';
-require '../core/verificarsesion.php';
-require '../core/verificarRol.php';
+// require '../core/verificarsesion.php';
+// require '../core/verificarRol.php';
 
 
 

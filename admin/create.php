@@ -29,7 +29,7 @@ $stmt = $con->prepare("INSERT INTO usuarios( correo,nombre,apellido, password, r
 $stmt->bind_param("sssss", $correo,$nombre,$apellido, $password, $rol);
 
 if ($stmt->execute()) {
-    echo "usuario creado correctamente";
+    header("Location: ../usuario/main.html");
 } else {
     echo "Error: " . $stmt->error;
 }

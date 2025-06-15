@@ -1,5 +1,3 @@
-
-
 function menuAdmin(opcion) {
   if (opcion === "usuarios") {
     mostrarUsuarios();
@@ -36,7 +34,7 @@ function mostrarUsuarios() {
     .then((response) => response.text())
     .then((html) => {
       document.getElementById("contenido").innerHTML = html;
-    
+
       cargarUsuarios();
     })
     .catch((error) => {
@@ -44,31 +42,33 @@ function mostrarUsuarios() {
     });
 }
 
-
 function cargarReservas() {
-  fetch('../reserva/read.php')
-      .then(response => {
-          if (!response.ok) throw new Error('Network response was not ok');
-          return response.json();
-      })
-      .then(data => {
-        data = data.datos; // Assuming the response has a 'datos' property
-        var tbody = $("#reservasTable tbody");
-        tbody.empty();
-        data.forEach(function (reserva) {
-          var fila = `<tr>
+  fetch("../reserva/read.php")
+    .then((response) => {
+      if (!response.ok) throw new Error("Network response was not ok");
+      return response.json();
+    })
+    .then((data) => {
+      data = data.datos; // Assuming the response has a 'datos' property
+      const tbody = document.querySelector("#reservasTable tbody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      data.forEach(function (reserva) {
+        const fila = `<tr>
                   <td>${reserva.id}</td>
                   <td>${reserva.usuario_id}</td>
                   <td>${reserva.habitacion_id}</td>
                   <td>${reserva.fecha_ingreso}</td>
                   <td>${reserva.fecha_salida}</td>
                   <td>${reserva.estado}</td>
-              </tr>`;
-          tbody.append(fila);
-        });
-        $("#reservasTable").DataTable().draw();
-      })
-      .catch(() => {
-          alert('Error al cargar las reservas.');
+                </tr>`;
+        tbody.insertAdjacentHTML("beforeend", fila);
       });
+      if (window.$ && $.fn.DataTable && $("#reservasTable").hasClass("dataTable")) {
+        $("#reservasTable").DataTable().draw();
+      }
+    })
+    .catch(() => {
+      alert("Error al cargar las reservas.");
+    });
 }

@@ -1,61 +1,3 @@
-var habitaciones = [
-  {
-    habitacion: "101",
-    estado: "Ocupada",
-    precio: "$100",
-    fecha_ingreso: "2023-10-01",
-    fecha_salida: "2023-10-05",
-    tipo: "Individual",
-  },
-  {
-    habitacion: "102",
-    estado: "Disponible",
-    precio: "$120",
-    fecha_ingreso: "2023-10-02",
-    fecha_salida: "2023-10-06",
-    tipo: "Doble",
-  },
-  {
-    habitacion: "103",
-    estado: "Mantenimiento",
-    precio: "$150",
-    fecha_ingreso: "2023-10-03",
-    fecha_salida: "2023-10-07",
-    tipo: "Suite",
-  },
-  {
-    habitacion: "101",
-    estado: "Ocupada",
-    precio: "$100",
-    fecha_ingreso: "2023-10-01",
-    fecha_salida: "2023-10-05",
-    tipo: "Individual",
-  },
-  {
-    habitacion: "102",
-    estado: "Disponible",
-    precio: "$120",
-    fecha_ingreso: "2023-10-02",
-    fecha_salida: "2023-10-06",
-    tipo: "Doble",
-  },
-  {
-    habitacion: "101",
-    estado: "Ocupada",
-    precio: "$100",
-    fecha_ingreso: "2023-10-01",
-    fecha_salida: "2023-10-05",
-    tipo: "Individual",
-  },
-  {
-    habitacion: "102",
-    estado: "Ocupada",
-    precio: "$120",
-    fecha_ingreso: "2023-10-01",
-    fecha_salida: "2023-10-05",
-    tipo: "Doble",
-  },
-];
 function dasboard() {
   var input = document.getElementsByName("tipo");
 
@@ -84,42 +26,35 @@ function renderizarTabla(tipo) {
 }
 function tablahabitaciones() {
   let contardis = 0;
-  let contarres = 0;
   let contarman = 0;
+  let total = 0;
 
-  habitaciones.forEach(function (habitacion) {
-    if (habitacion.estado == "Disponible") {
-      contardis++;
-    }
-    if (habitacion.estado == "Ocupada") {
-      contarres++;
-    }
-    if (habitacion.estado == "Mantenimiento") {
-      contarman++;
-    }
-  });
-  let total = habitaciones.length;
+  // habitaciones.forEach(function (habitacion) {
+  //   if (habitacion.estado == "Disponible") {
+  //     contardis++;
+  //   }
+  //   if (habitacion.estado == "Ocupada") {
+  //     contarres++;
+  //   }
+  //   if (habitacion.estado == "Mantenimiento") {
+  //     contarman++;
+  //   }
+  // });
   console.log("Total habitaciones: " + total);
 
   html = `
 <label for="">Disponibles</label>
 <div class="progress">
 
-  <div class="progress-bar bg-success" role="progressbar" style="width: ${
+  <div id="barradisponible" class="progress-bar bg-success" role="progressbar" style="width: ${
     (contardis / total) * 100
   }%" aria-valuenow="${contardis}" aria-valuemin="0" aria-valuemax="${total}"></div>
-</div>
-<label for=""> Reservadas </label>
-<div class="progress">
-  <div class="progress-bar bg-info" role="progressbar" style="width: ${
-    (contarres / total) * 100
-  }%" aria-valuenow="${contarres}" aria-valuemin="0" aria-valuemax="${total}"></div>
 </div>
 <label for="">Mantenimiento</label>
 <div class="progress">
       <br />
 
-  <div class="progress-bar bg-warning" role="progressbar" style="width: ${
+  <div id="barramantenimiento"  class="progress-bar bg-warning" role="progressbar" style="width: ${
     (contarman / total) * 100
   }%" aria-valuenow="${contarman}" aria-valuemin="0" aria-valuemax="${total}"></div>
 </div>
@@ -130,16 +65,15 @@ function tablahabitaciones() {
       html += html2;
       document.getElementById("tabla").innerHTML = html;
       // document.getElementById("tabla").innerHTML = html;
-    }
-  )
+    })
     .catch((error) => {
       console.error("Error al cargar el contenido:", error);
-    }
-  );
-  
+    });
   cargarHabitaciones();
 }
-function cargarHabitaciones() {
+async function cargarHabitaciones() {
+  let nDISPONIBLE = 0;
+  let nMANTENIMIENTO = 0;
   fetch("../habitacion/readhabitacion.php")
     .then((response) => response.json())
     .then((data) => {
@@ -152,6 +86,15 @@ function cargarHabitaciones() {
       data.forEach((habitacion) => {
         const tr = document.createElement("tr");
         i++;
+        let estado = habitacion.estado;
+        console.log("Estado de la habitación:", estado);
+        if (habitacion.estado === "DISPONIBLE") {
+          nDISPONIBLE++;
+          console.log("Habitación disponible:", habitacion.numero);
+        }
+        if (habitacion.estado === "MANTENIMIENTO") {
+          nMANTENIMIENTO++;
+        }
         tr.innerHTML = `
               <td>${i}</td>
               <td>${habitacion.numero}</td>
@@ -163,23 +106,35 @@ function cargarHabitaciones() {
               <td>
                   <button class="btn btn-sm btn-primary me-2" onclick="editarEstadoHabitacion(${
                     habitacion.id
-                  }, ${habitacion.estado})">Estado</button>
+                  }, '${habitacion.estado}')">Estado</button>
                   <button class="btn btn-sm btn-danger" onclick="eliminarHabitacion(${
                     habitacion.id
                   })">Eliminar</button>
               </td>
           `;
         tbody.appendChild(tr);
+        console.log("htabitaciones disponibles:", nDISPONIBLE);
+        console.log("htabitaciones mantenimiento:", nMANTENIMIENTO);
+        document.getElementById("barradisponible").style.width = `${
+          (nDISPONIBLE / (nDISPONIBLE + nMANTENIMIENTO)) * 100
+        }%`;
+        document
+          .getElementById("barradisponible")
+          .setAttribute("aria-valuenow", nDISPONIBLE);
+        document.getElementById("barramantenimiento").style.width = `${
+          (nMANTENIMIENTO / (nDISPONIBLE + nMANTENIMIENTO)) * 100
+        }%`;
+        document
+          .getElementById("barramantenimiento")
+          .setAttribute("aria-valuenow", nMANTENIMIENTO);
       });
     })
     .catch((error) =>
       console.error("Error al cargar las habitaciones:", error)
     );
-
 }
 
 function tablatipohabitacion() {
-  // Implementar la lógica para renderizar la tabla de tipo de habitaciones
   console.log("Renderizando tabla de tipo de habitaciones");
   let tipos = [
     {
@@ -327,4 +282,40 @@ cambiarMes = function (incremento) {
   }
 };
 
+function editarEstadoHabitacion(id, estado) {
+  console.log("Editar estado de habitación con ID:", id, "Estado:", estado);
+  // http://localhost/Lab5-SIS256/admin/editestadohabitacion.php
+  const formdata = new FormData();
+  formdata.append("id", id);
+  formdata.append("estado", estado);
+  fetch("editestadohabitacion.php", {
+    method: "POST",
+    body: formdata,
+  })
+    .then((response) => response.json())
+    .then((resultado) => {
+      alert("Respuesta del servidor: " + resultado.message);
+    })
+    .catch((error) => {
+      alert("Error en la solicitud: " + error);
+    });
+  cargarHabitaciones();
+}
 
+function eliminarHabitacion(id) {
+  console.log("Eliminar habitación con ID:", id);
+  const formdata = new FormData();
+  formdata.append("id", id);
+  fetch("../habitacion/deleteHabitacion.php", {
+    method: "POST",
+    body: formdata,
+  })
+    .then((response) => response.json())
+    .then((resultado) => {
+      alert("Respuesta del servidor: " + resultado.message);
+      cargarHabitaciones();
+    })
+    .catch((error) => {
+      alert("Error en la solicitud: " + error);
+    });
+}

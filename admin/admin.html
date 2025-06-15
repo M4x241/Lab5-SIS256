@@ -222,9 +222,9 @@
             <div class="mb-3">
               <label for="habitacionTipo" class="form-label">Tipo</label>
               <select class="form-select" id="habitacionTipo">
-                <option value="1">Simple</option>
-                <option value="2">Doble</option>
-                <option value="3">Suite</option>
+                <option value="4">Simple</option>
+                <option value="3">Doble</option>
+                <option value="1">Matrimonial</option>
               </select>
             </div>
             <div class="mb-3">
@@ -234,7 +234,7 @@
                 <option value="MANTENIMIENTO">MANTENIMIENTO</option>
               </select>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="habitacionPrecio" class="form-label">Precio</label>
               <input
                 type="number"
@@ -242,7 +242,7 @@
                 id="habitacionPrecio"
                 required
               />
-            </div>
+            </div> -->
           </form>
         </div>
         <div class="modal-footer">
@@ -266,20 +266,9 @@
     </div>
   </div>
   <script>
-    function abrirModalEditarUsuario(usuario) {
-      // usuario: objeto con datos del usuario a editar
-      document.getElementById("usuarioId").value = usuario.id || "";
-      document.getElementById("usuarioNombre").value = usuario.nombre || "";
-      document.getElementById("usuarioEmail").value = usuario.correo || "";
-      document.getElementById("usuarioRol").value = usuario.rol || "user";
-      document.getElementById("usuarioPassword").value = usuario.password || "";
-      document.getElementById("usuarioApellido").value = usuario.apellido || "";
-      var modal = new bootstrap.Modal(
-        document.getElementById("editarUsuarioModal")
-      );
-      modal.show();
-    }
     function updateUser() {
+      event.preventDefault();
+
       const id = document.getElementById("usuarioId").value;
       const nombre = document.getElementById("usuarioNombre").value;
       const apellido = document.getElementById("usuarioApellido").value;
@@ -291,45 +280,46 @@
         `Actualizando ${id}: ${nombre} ${apellido}, ${email}, Rol: ${rol}`,
         `Password: ${password}`
       );
+      const formdata = new FormData();
+      formdata.append("id", id);
+      formdata.append("nombre", nombre);
+      formdata.append("apellido", apellido);
+      formdata.append("correo", email);
+      formdata.append("rol", rol);
+      formdata.append("password", password);
+
       // usar ajax para enviar los datos al servidor
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "update.php", true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          const response = JSON.parse(xhr.responseText);
-          if (response.success) {
-            alert("Usuario actualizado correctamente");
-            menuAdmin("habitaciones");
-          } else {
-            alert("Error al actualizar el usuario: " + response.message);
+      fetch("update.php", {
+        method: "POST",
+        body: formdata,
+      })
+        .then((response) => response.text())
+        .then((text) => {
+          console.log("Texto recibido:", text);
+          try {
+            const resultado = JSON.parse(text);
+            alert("Servidor: " + resultado.message);
+            const modal = bootstrap.Modal.getInstance(
+              document.getElementById("editarUsuarioModal")
+            );
+            modal.hide();
+          } catch (e) {
+            alert("Respuesta no es JSON válido:\n" + text);
           }
-        }
-      };
-      xhr.send(
-        JSON.stringify({
-          id: id,
-          nombre: nombre,
-          apellido: apellido,
-          correo: email,
-          rol: rol,
-          password: password,
-        })
-      );
+        });
     }
     function addRoom() {
+      console.log("Añadiendo habitación...");
       event.preventDefault();
       const numero = document.getElementById("habitacionNumero").value;
       const tipo = document.getElementById("habitacionTipo").value;
       const estado = document.getElementById("habitacionEstado").value;
-      const precio = document.getElementById("habitacionPrecio").value;
       const piso = document.getElementById("habitacionPiso").value;
 
       const formdata = new FormData();
       formdata.append("numero", numero);
       formdata.append("tipo_id", tipo);
       formdata.append("estado", estado);
-      formdata.append("precio", precio);
       formdata.append("piso", piso);
       fetch("createHabitacion.php", {
         method: "POST",
@@ -338,27 +328,17 @@
         .then((response) => response.json()) // o .json() si devuelves JSON
         .then((resultado) => {
           alert("Respuesta del servidor: " + resultado.success);
+          const modal = bootstrap.Modal.getInstance(
+            document.getElementById("anadirHabitacionModal")
+          );
+          modal.hide();
+          tablahabitaciones();
         })
         .catch((error) => {
           alert("Error en la solicitud: " + error);
         });
     }
-    function editarEstadoHabitacion(id,estado){
-      const formdata = new FormData();
-      formdata.append("id", id);
-      formdata.append("estado", estado);
-      fetch("editarestadohabitacion.php", {
-        method: "POST",
-        body: formdata,
-      })
-        .then((response) => response.json()) // o .json() si devuelves JSON
-        .then((resultado) => {
-          alert("Respuesta del servidor: " + resultado.success);
-        })
-        .catch((error) => {
-          alert("Error en la solicitud: " + error);
-        });
-    }
+  
   </script>
   <script src="dashboard.js?v1=5"></script>
   <script src="components.js?v1=54"></script>
