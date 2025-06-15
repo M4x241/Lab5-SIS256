@@ -1,8 +1,5 @@
 # Lab5-SIS256
 
-
-# Lab5-SIS256
-
 ## Integrantes
 
 - **Amurrio Huaygua Karen** – Ingeniero de Componentes y Casos de Uso  
